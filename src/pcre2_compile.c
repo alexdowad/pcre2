@@ -11433,13 +11433,13 @@ if ((options & PCRE2_AUTO_CALLOUT) != 0)
 
 if (parsed_size_needed >= PARSED_PATTERN_DEFAULT_SIZE)
   {
-  uint32_t *heap_parsed_pattern = ccontext->memctl.malloc((parsed_size_needed + 1) * sizeof(uint32_t), ccontext->memctl.memory_data);
-  if (heap_parsed_pattern == NULL)
+  cb.parsed_pattern_buf = ccontext->memctl.malloc((parsed_size_needed + 1) * sizeof(uint32_t), ccontext->memctl.memory_data);
+  if (cb.parsed_pattern_buf == NULL)
     {
     *errorptr = ERR21;
     goto EXIT;
     }
-  cb.parsed_pattern_buf = cb.parsed_pattern = heap_parsed_pattern;
+  cb.parsed_pattern = cb.parsed_pattern_buf;
   cb.parsed_pattern_limit = cb.parsed_pattern + parsed_size_needed + 1;
   }
 

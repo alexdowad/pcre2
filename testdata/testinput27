@@ -1,5 +1,7 @@
 # Tests for the pattern rewriter which precedes regex compilation (without UTF)
 
+#forbid_utf
+
 # Pulling out common prefixes from alternation:
 
 # Simplest case:

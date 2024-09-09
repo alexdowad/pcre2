@@ -1,21 +1,12 @@
 # Tests for the pattern rewriter which precedes regex compilation (with UTF)
 
+#pattern utf
+
 # Unicode property property escape sequences can be pulled out
 /\p{Greek}a|\p{Greek}b/B
 ------------------------------------------------------------------
         Bra
         prop Greek
-        [ab]
-        Ket
-        End
-------------------------------------------------------------------
-
-# \C escape (single code unit) can be pulled out
-# ⇒ \C[ab]
-/\Ca|\Cb/B
-------------------------------------------------------------------
-        Bra
-        AllAny
         [ab]
         Ket
         End

@@ -13601,6 +13601,7 @@ Subject length lower bound = 4
 /abcd/I,no_start_optimize
 Capture group count = 0
 Options: no_start_optimize
+Optimizations: auto_possess,dotstar_anchor
 
 /(|ab)*?d/I
 Capture group count = 1
@@ -13616,6 +13617,7 @@ Subject length lower bound = 1
 /(|ab)*?d/I,no_start_optimize
 Capture group count = 1
 Options: no_start_optimize
+Optimizations: auto_possess,dotstar_anchor
    abd
  0: abd
  1: ab
@@ -13887,6 +13889,7 @@ Subject length lower bound = 3
 Capture group count = 0
 Compile options: no_dotstar_anchor
 Overall options: anchored no_dotstar_anchor
+Optimizations: auto_possess,start_optimize
 First code unit = 'a'
 Subject length lower bound = 3
 
@@ -13908,6 +13911,7 @@ No match
 /.*\d/info,no_dotstar_anchor,auto_callout
 Capture group count = 0
 Options: auto_callout no_dotstar_anchor
+Optimizations: auto_possess,start_optimize
 Subject length lower bound = 1
 \= Expect no match
     aaa
@@ -13935,12 +13939,12 @@ Subject length lower bound = 1
 /.*\d/dotall,no_dotstar_anchor,info
 Capture group count = 0
 Options: dotall no_dotstar_anchor
+Optimizations: auto_possess,start_optimize
 Subject length lower bound = 1
 
 /(*NO_DOTSTAR_ANCHOR)(?s).*\d/info
 Capture group count = 0
-Compile options: <none>
-Overall options: no_dotstar_anchor
+Optimizations: auto_possess,start_optimize
 Subject length lower bound = 1
 
 '^(?:(a)|b)(?(1)A|B)'
@@ -18049,12 +18053,14 @@ Subject length lower bound = 1
 /a?(?=b(*COMMIT)c|)d/I,no_start_optimize
 Capture group count = 0
 Options: no_start_optimize
+Optimizations: auto_possess,dotstar_anchor
     bd
 No match
 
 /(?=b(*COMMIT)c|)d/I,no_start_optimize
 Capture group count = 0
 Options: no_start_optimize
+Optimizations: auto_possess,dotstar_anchor
     bd
 No match
 

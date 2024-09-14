@@ -609,6 +609,36 @@ total length of the tables. */
 #define ctypes_offset (cbits_offset + cbit_length)  /* Character types */
 #define TABLES_LENGTH (ctypes_offset + 256)
 
+/* Private flags used in compile_context.optimization_flags */
+
+#define PCRE2_OPTIM_AUTO_POSSESS    0x00000001u
+#define PCRE2_OPTIM_DOTSTAR_ANCHOR  0x00000002u
+#define PCRE2_OPTIM_START_OPTIMIZE  0x00000004u
+
+#define PCRE2_OPTIMIZATION_ALL      0x00000007u
+
+/* Tables for converting public optimization directives listed in
+pcre2.h to private optimization flags. */
+
+#define OPTIM_SETBITS \
+  0,                         /* no optimization */   \
+  PCRE2_OPTIMIZATION_ALL,    /* full optimization */ \
+  PCRE2_OPTIM_AUTO_POSSESS,                          \
+  0,                                                 \
+  PCRE2_OPTIM_DOTSTAR_ANCHOR,                        \
+  0,                                                 \
+  PCRE2_OPTIM_START_OPTIMIZE,                        \
+  0
+
+#define OPTIM_CLEARBITS \
+  PCRE2_OPTIMIZATION_ALL,    /* no optimization */   \
+  0,                         /* full optimization */ \
+  0,                                                 \
+  PCRE2_OPTIM_AUTO_POSSESS,                          \
+  0,                                                 \
+  PCRE2_OPTIM_DOTSTAR_ANCHOR,                        \
+  0,                                                 \
+  PCRE2_OPTIM_START_OPTIMIZE
 
 /* -------------------- Character and string names ------------------------ */
 

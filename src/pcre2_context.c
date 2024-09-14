@@ -141,7 +141,8 @@ pcre2_compile_context PRIV(default_compile_context) = {
   NEWLINE_DEFAULT,                           /* Newline convention */
   PARENS_NEST_LIMIT,                         /* As it says */
   0,                                         /* Extra options */
-  MAX_VARLOOKBEHIND                          /* As it says */
+  MAX_VARLOOKBEHIND,                         /* As it says */
+  PCRE2_OPTIMIZATION_ALL                     /* All optimizations enabled */
   };
 
 /* The create function copies the default into the new memory, but must
@@ -409,6 +410,38 @@ ccontext->stack_guard_data = user_data;
 return 0;
 }
 
+static const uint16_t optimize_setbits[] = {
+  OPTIM_SETBITS
+};
+static const uint16_t optimize_clearbits[] = {
+  OPTIM_CLEARBITS
+};
+
+/* the two arrays above must be kept in sync */
+typedef char CHECK_OPTIM_BITS_ARRAYS[ARRAY_SIZE(optimize_setbits) == ARRAY_SIZE(optimize_clearbits) ? 1 : -1];
+
+PCRE2_EXP_DEFN int PCRE2_CALL_CONVENTION
+pcre2_set_optimize(pcre2_compile_context *ccontext, uint32_t directive)
+{
+/* We are reusing some symbolic constants which were already defined before
+ * pcre2_set_optimize() was added; convert to indexes in conversion tables */
+if (directive == PCRE2_NO_AUTO_POSSESS)
+  directive = 3;
+else if (directive == PCRE2_NO_DOTSTAR_ANCHOR)
+  directive = 5;
+else if (directive == PCRE2_NO_START_OPTIMIZE)
+  directive = 7;
+
+if (directive < (sizeof(optimize_setbits)/sizeof(uint16_t)))
+  {
+  /* Both of the public directive → private flag conversion tables should
+   * be the same size, but let's make sure */
+  PCRE2_ASSERT(directive < (sizeof(optimize_clearbits)/sizeof(uint16_t)));
+  ccontext->optimization_flags |= optimize_setbits[directive];
+  ccontext->optimization_flags &= ~optimize_clearbits[directive];
+  }
+return 0;
+}
 
 /* ------------ Match context ------------ */
 

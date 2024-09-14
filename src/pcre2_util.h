@@ -41,6 +41,8 @@ POSSIBILITY OF SUCH DAMAGE.
 #ifndef PCRE2_UTIL_H_IDEMPOTENT_GUARD
 #define PCRE2_UTIL_H_IDEMPOTENT_GUARD
 
+#define ARRAY_SIZE(a) (sizeof(a) / sizeof(a[0]))
+
 /* Assertion macros */
 
 #ifdef HAVE_BUILTIN_UNREACHABLE

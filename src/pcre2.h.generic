@@ -628,7 +628,9 @@ PCRE2_EXP_DECL int PCRE2_CALL_CONVENTION \
   pcre2_set_parens_nest_limit(pcre2_compile_context *, uint32_t); \
 PCRE2_EXP_DECL int PCRE2_CALL_CONVENTION \
   pcre2_set_compile_recursion_guard(pcre2_compile_context *, \
-    int (*)(uint32_t, void *), void *);
+    int (*)(uint32_t, void *), void *); \
+PCRE2_EXP_DECL int PCRE2_CALL_CONVENTION \
+  pcre2_set_optimize(pcre2_compile_context *, uint32_t);
 
 #define PCRE2_MATCH_CONTEXT_FUNCTIONS \
 PCRE2_EXP_DECL pcre2_match_context *PCRE2_CALL_CONVENTION \

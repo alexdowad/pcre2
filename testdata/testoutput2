@@ -13944,6 +13944,8 @@ Subject length lower bound = 1
 
 /(*NO_DOTSTAR_ANCHOR)(?s).*\d/info
 Capture group count = 0
+Compile options: <none>
+Overall options: no_dotstar_anchor
 Optimizations: auto_possess,start_optimize
 Subject length lower bound = 1
 

@@ -10590,6 +10590,25 @@ if ((options & PCRE2_LITERAL) == 0)
 
           case PSO_OPTMZ:
           optim_flags &= ~(p->value);
+
+          /* For backward compatibility the three original VERBs to disable
+          optimizations need to also update the corresponding external option. */
+
+          switch(p->value)
+            {
+            case PCRE2_OPTIM_AUTO_POSSESS:
+            cb.external_options |= PCRE2_NO_AUTO_POSSESS;
+            break;
+
+            case PCRE2_OPTIM_DOTSTAR_ANCHOR:
+            cb.external_options |= PCRE2_NO_DOTSTAR_ANCHOR;
+            break;
+
+            case PCRE2_OPTIM_START_OPTIMIZE:
+            cb.external_options |= PCRE2_NO_START_OPTIMIZE;
+            break;
+            }
+
           break;
 
           default:
